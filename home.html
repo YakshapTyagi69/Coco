@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coco - Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom styles if needed for specific elements */
+  </style>
+</head>
+<body class="bg-gradient-to-br from-green-100 via-white to-green-200 min-h-screen flex flex-col">
+
+  <!-- Reward Section (Top-right corner) -->
+  <div class="absolute top-4 right-4 bg-green-600 text-white px-4 py-2 rounded-full shadow-md">
+    <span class="font-bold text-lg"><button type="submit"><a href="reward.html"  class="inline-block bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2 rounded-lg transition">
+        Coins:50
+      </a></button></span>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex flex-col items-center justify-center space-y-8 mt-16 px-4 sm:px-8 md:px-16">
+    
+    <!-- Header with Logo -->
+    <div class="text-center">
+      <img src="coco logo.png" alt="Coco Logo" class="h-24 w-24 mb-4" align-items= "center"/>
+      <h1 class="text-3xl font-semibold text-green-700">Welcome to Coco</h1>
+      <p class="text-lg text-gray-700">Help protect animals and earn rewards!</p>
+    </div>
+
+    <!-- Location Button -->
+    <div class="w-full max-w-md text-center">
+      <button onclick="getLocation()" class="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition">
+        Share Your Location
+      </button>
+      <p id="locationOutput" class="mt-2 text-gray-500 text-sm"></p>
+    </div>
+
+    <!-- Capture Animal Photo & Type Section -->
+    <div class="w-full max-w-md text-center space-y-4">
+      <button onclick="triggerCamera()" class="w-full bg-blue-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition"><a href="camera.html">
+        Click Picture of Animal</a>
+      </button>
+
+      <div>
+        <label for="animalType" class="block text-gray-600 font-medium">Animal Type</label>
+        <input type="text" id="animalType" name="animalType" placeholder="Enter animal type" class="w-full border border-gray-300 rounded-lg px-4 py-2 mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Camera Functionality (Optional) -->
+  <div class="map-container">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4137.161390466067!2d77.4374613867193!3d28.596116916377106!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cef44bc40c515%3A0x3368561b0b0fe644!2sJIMS%20Noida%20Extension%20College!5e0!3m2!1sen!2sin!4v1745491730011!5m2!1sen!2sin"
+            width="600" height="450" style="border: 0" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+  <script>
+    function triggerCamera() {
+      alert("Camera functionality is not implemented in this demo.");
+      // You can integrate camera functionality using HTML5 Camera API or a library.
+    }
+  </script>
+
+</body>
+</html>

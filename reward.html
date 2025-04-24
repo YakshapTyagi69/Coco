@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Rewards - Coco App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-green-50 min-h-screen flex flex-col items-center justify-center p-6">
+
+  <!-- Rewards Container -->
+  <div class="bg-white rounded-2xl shadow-xl p-8 w-full max-w-2xl text-center relative">
+
+    <!-- Reward Coins Display -->
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-bold text-green-700">My Rewards</h2>
+      <div class="bg-green-600 text-white px-4 py-2 rounded-full text-lg font-semibold shadow">
+        Coins: <span id="coin-count">50</span>
+      </div>
+    </div>
+
+    <!-- Certificate Preview -->
+    <div class="border rounded-xl p-4 bg-gray-50 shadow-inner mb-6">
+      <h3 class="text-xl font-semibold text-gray-700 mb-2">Your Certificate of Humanity</h3>
+      <p class="text-gray-600 mb-4">You've earned this for your contributions toward animal safety.</p>
+    <button type="submit"><a href="certificate.html"  class="inline-block bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2 rounded-lg transition">
+        View Certificate
+      </a></button>
+    </div>
+
+    <!-- Avail Reward Section -->
+    <div class="mt-6">
+      <h3 class="text-xl font-semibold text-gray-700 mb-2">Redeem Your Coins</h3>
+      <p class="text-gray-600 mb-4">Use your coins to unlock exclusive Coco rewards and merchandise!</p>
+      <button onclick="availReward()" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold px-6 py-3 rounded-xl transition">
+        Avail Reward
+      </button>
+    </div>
+
+    <!-- Feedback Message -->
+    <p id="reward-message" class="mt-4 text-green-600 font-medium hidden"></p>
+
+  </div>
+
+  <!-- JS Logic -->
+  <script>
+    function availReward() {
+      const coinCount = parseInt(document.getElementById("coin-count").innerText);
+      if (coinCount >= 100) {
+        document.getElementById("reward-message").innerText = "🎉 Reward availed successfully!";
+        document.getElementById("reward-message").classList.remove("hidden");
+        document.getElementById("coin-count").innerText = coinCount - 100;
+      } else {
+        document.getElementById("reward-message").innerText = "⚠️ You need at least 100 coins to avail a reward.";
+        document.getElementById("reward-message").classList.remove("hidden");
+      }
+    }
+  </script>
+
+</body>
+</html>

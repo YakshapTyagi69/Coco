@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coco Emergency App - Login</title>
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <h2>Coco Emergency App</h2>
+      <form class="login-form" onsubmit="handleLogin(event)">
+        <input type="text" name="Name" placeholder="Name" required />
+        <input type="tel" name="mobile" placeholder="Mobile Number" pattern="[0-9]{10}" required />
+        <input type="email" name="email" placeholder="Email ID" required />
+        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-300 font-semibold"><a href="description.html">Login</a></button>
+        <div class="spinner" id="spinner"></div>
+        <p class="message" id="message"></p>
+      </form>
+    </div>
+  </div>
+
+
+
+  <script>
+    // Firebase config (replace with your own)
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    function handleLogin(event) {
+      event.preventDefault();
+      const form = event.target;
+      const state = form.state.value.trim();
+      const mobile = form.mobile.value.trim();
+      const email = form.email.value.trim();
+      const message = document.getElementById("message");
+      const spinner = document.getElementById("spinner");
+      const submitBtn = document.getElementById("submitBtn");
+
+      message.textContent = "";
+      spinner.style.display = "block";
+      submitBtn.disabled = true;
+
+      firebase.database().ref("logins").push({
+        state,
+        mobile,
+        email,
+        timestamp: new Date().toISOString()
+      })
+      .then(() => {
+        message.textContent = "Login submitted successfully!";
+        message.style.color = "green";
+        form.reset();
+      })
+      .catch((error) => {
+        message.textContent = "Error: " + error.message;
+        message.style.color = "red";
+      })
+      .finally(() => {
+        spinner.style.display = "none";
+        submitBtn.disabled = false;
+      });
+    }
+  </script>
+</body>
+</html>
+

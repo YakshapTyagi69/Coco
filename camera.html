@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camera Access</title>
+  <style>
+    /* Style for video and capture button */
+    video {
+      width: 100%;
+      max-width: 500px;
+      border: 2px solid #ccc;
+      margin-bottom: 20px;
+    }
+
+    #capture-button {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    #capture-button:hover {
+      background-color: #218838;
+    }
+
+    #photo {
+      margin-top: 20px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Camera Access Example</h1>
+  
+  <!-- Video element to display camera feed -->
+  <video id="video" autoplay></video>
+  
+  <!-- Capture Button -->
+  <button id="capture-button">Capture Photo</button>
+  
+  <!-- Canvas to show captured photo -->
+  <canvas id="photo"></canvas>
+
+  <script>
+    // Elements
+    const video = document.getElementById('video');
+    const captureButton = document.getElementById('capture-button');
+    const canvas = document.getElementById('photo');
+    const ctx = canvas.getContext('2d');
+    
+    // Access user's camera
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then((stream) => {
+        // Display the video stream in the video element
+        video.srcObject = stream;
+      })
+      .catch((err) => {
+        alert('Error accessing camera: ' + err.message);
+      });
+
+    // Capture photo from video feed
+    captureButton.addEventListener('click', () => {
+      // Set canvas size to video dimensions
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+
+      // Draw the current frame from video to canvas
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      // Show the captured photo (canvas)
+      canvas.style.display = 'block';
+    });
+  </script>
+  <br>
+  <br>
+  <button type="submit"><a href="home.html">Captured</a></button>
+</body>
+</html>
