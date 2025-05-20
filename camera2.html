@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camera Access</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+
+    video, canvas {
+      width: 100%;
+      max-width: 500px;
+      border: 2px solid #ccc;
+      margin: 20px auto;
+      display: block;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #capture-button {
+      background-color: #28a745;
+      color: white;
+    }
+
+    #capture-button:hover {
+      background-color: #218838;
+    }
+
+    #navigate-button {
+      background-color: #007bff;
+      color: white;
+    }
+
+    #navigate-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Camera Access Example</h1>
+
+  <video id="video" autoplay playsinline></video>
+  <button id="capture-button">Capture Photo</button>
+  <canvas id="photo"></canvas>
+
+  <button id="navigate-button" onclick="location.href='home.html'">Go to Home</button>
+
+  <script>
+    const video = document.getElementById('video');
+    const captureButton = document.getElementById('capture-button');
+    const canvas = document.getElementById('photo');
+    const ctx = canvas.getContext('2d');
+
+    async function initCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = stream;
+      } catch (err) {
+        alert('Error accessing camera: ' + err.message);
+      }
+    }
+
+    captureButton.addEventListener('click', () => {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    });
+
+    window.onload = initCamera;
+  </script>
+</body>
+</html>
